@@ -416,8 +416,8 @@ handshaking(info, {Trans, _Socket, Data},
     end;
 handshaking(info, Msg, Context) ->
     handle_info(Msg, Context);
-handshaking({call, From}, _Event, _Context) ->
-    {keep_state_and_data, {reply, From, {error, unhandled_sync_event}}};
+handshaking({call, From}, Event, Context) ->
+    handle_info({Event, From}, Context);
 handshaking(_EType, _Event, _Context) ->
     keep_state_and_data.
 
